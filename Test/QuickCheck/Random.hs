@@ -6,38 +6,6 @@
 #endif
 module Test.QuickCheck.Random where
 
-#ifndef NO_TF_RANDOM
-import System.Random
-import System.Random.TF
-import System.Random.TF.Gen(splitn)
-import Data.Word
-import Data.Bits
-
-#define TheGen TFGen
-
-newTheGen :: IO TFGen
-newTheGen = newTFGen
-
-bits, mask, doneBit :: Integral a => a
-bits = 14
-mask = 0x3fff
-doneBit = 0x4000
-
-chip :: Bool -> Word32 -> TFGen -> TFGen
-chip done n g = splitn g (bits+1) (if done then m .|. doneBit else m)
-  where
-    m = n .&. mask
-
-chop :: Integer -> Integer
-chop n = n `shiftR` bits
-
-stop :: Integral a => a -> Bool
-stop n = n <= mask
-
-mkTheGen :: Int -> TFGen
-mkTheGen = mkTFGen
-
-#else
 import System.Random
 
 #define TheGen StdGen
@@ -56,7 +24,6 @@ chop n = n `div` 2
 
 stop :: Integral a => a -> Bool
 stop n = n <= 1
-#endif
 
 -- | The "standard" QuickCheck random number generator.
 -- A wrapper around either 'TFGen' on GHC, or 'StdGen'

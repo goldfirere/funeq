@@ -30,20 +30,9 @@ library
         Test.QuickCheck.Test
         Test.QuickCheck.Text
         System.Random
-        System.Random.TF
-        System.Random.TF.Gen
-        System.Random.TF.Init
-        Control.Monad.Primitive
-        Data.Primitive.ByteArray
-        Data.Primitive.Internal.Compat
-        Data.Primitive.Internal.Operations
-        Data.Primitive.MachDeps
-        Data.Primitive.Types
         Data.Number.Erf
-  default-extensions:  CPP
   build-depends:       base==4.*
                      , time >= 1.8
-                     , ghc-prim >= 0.5
                      , transformers >= 0.5
                      , containers >= 0.6
                      , deepseq >= 1.4
